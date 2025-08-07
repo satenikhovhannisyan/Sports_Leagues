@@ -6,7 +6,6 @@ function SportsDropdown() {
     const { sportsList, sport, setSport } = useLeaguesContext();
 
     return (
-
         <TextField
             id="select-sport"
             select
@@ -14,6 +13,10 @@ function SportsDropdown() {
             value={sport}
             defaultValue="all"
             onChange={(e) => setSport(e.target.value)}
+            sx={{
+                margin: { xs: '20px 0', sm: '0' },
+                width: { xs: '100%', sm: 'inherit' }
+            }}
         >
             <MenuItem value="all" key="all-sports">
                 All Sports

@@ -1,9 +1,15 @@
-function Loader() {
-    return (
-        <div>
-            <p>Loading data...</p>   
-        </div>
-    );
-}
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
-export default Loader;
+export default function CircularIndeterminate() {
+  return (
+    <Box sx={{
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      margin: "auto",
+    }}>
+      <CircularProgress color='inherit' />
+    </Box>
+  );
+}

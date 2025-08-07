@@ -1,14 +1,22 @@
-import { CardMedia } from "@mui/material";
+import CardMedia from "@mui/material/CardMedia";
 
-function Badge({ selectedBadgeUrl = "" }) {
+function Badge({ selectedBadgeUrl = "", }) {    
     
     return (
         <CardMedia
             component="img"
-            height="140"
             image={selectedBadgeUrl}
             alt="Season badge"
-            sx={{ objectFit: "contain", bgcolor: "#f5f5f5" }}
+            sx={{ objectFit: "contain" }}
+            style={{
+                maxWidth: "120px",
+                maxHeight: "120px",
+                objectFit: "contain",
+                borderRadius: "8px",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
+                margin: "0 auto",
+                display: "block",
+            }}
         />
     );
 }

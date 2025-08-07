@@ -2,5 +2,31 @@
   margin: 0 auto;
   text-align: center;
   flex-grow: 1;
-  border: dashed;
+  /* border: dashed; */
+  min-height: 100vh;
 }
+
+/* Applies to all scrollable elements */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  border-radius: 20px;
+
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  border: 2px solid #f0f0f0;
+  background-color: gray;
+}
+
+/* Firefox support */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: gray transparent;
+}
+

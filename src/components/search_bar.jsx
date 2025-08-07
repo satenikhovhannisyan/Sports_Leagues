@@ -1,5 +1,5 @@
-import { TextField } from "@mui/material";
 import { useLeaguesContext } from "./context/export";
+import TextField from "@mui/material/TextField";
 
 function SearchBar() {
     const { search, setSearch } = useLeaguesContext();
@@ -11,6 +11,7 @@ function SearchBar() {
             size="small"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
+            sx={{ width: { xs: '100%', sm: 'inherit'}}}
         />
     );
 }
