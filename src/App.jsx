@@ -1,8 +1,8 @@
-import { LeaguesProvider } from "./components/context/leagues_context";
-import { ErrorBoundary } from "./components/error_boundary";
-import Filters from "./components/filters";
-import LeaguesGrid from "./components/leagues_grid";
-import Header from "./components/header";
+import { LeaguesProvider } from "./context/leagues_context";
+import { ErrorBoundary } from "./components/error/error_boundary";
+import Filters from "./components/UI/filters";
+import LeaguesGrid from "./components/leagues/leagues_grid";
+import Header from "./components/layout/header";
 import Box from "@mui/material/Box";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';

@@ -1,6 +1,6 @@
-import TextField from "@mui/material/TextField";
-import { useLeaguesContext } from "./context/export";
+import { useLeaguesContext } from "../../context/export";
 import MenuItem from "@mui/material/MenuItem";
+import TextField from "@mui/material/TextField";
 
 function SportsDropdown() {
     const { sportsList, sport, setSport } = useLeaguesContext();

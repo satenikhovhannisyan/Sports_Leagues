@@ -1,8 +1,9 @@
+import React from "react";
+
 import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import React from "react";
 
 export class ErrorBoundary extends React.Component {
   constructor(props) {

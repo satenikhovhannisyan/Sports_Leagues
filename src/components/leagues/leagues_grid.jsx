@@ -1,8 +1,10 @@
 import { useMemo } from "react";
-import { useLeaguesContext } from "./context/export";
+import { useLeaguesContext } from "../../context/export";
+
 import LeagueCard from "./league_card";
-import Loader from "./loader";
-import ErrorMessage from "./error";
+import Loader from "../UI/loader";
+import ErrorMessage from "../error/error";
+
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";

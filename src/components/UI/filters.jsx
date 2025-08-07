@@ -1,7 +1,7 @@
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
 import SearchBar from "./search_bar";
 import SportsDropdown from "./sport_dropdown";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
 
 export default function Filters() {
 

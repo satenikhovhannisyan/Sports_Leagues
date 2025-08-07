@@ -1,23 +1,58 @@
 import { useState } from "react";
-import { useLeaguesContext } from "./context/export";
+import { useLeaguesContext } from "../../context/export";
 
 import Badge from "./badge";
+
+import { fetchFromApi } from "../../api/requests";
+import { SEASON_BADGE } from "../../api/endpoints";
+import { BADGES_CACHE_KEY, BADGES_TTL } from "../../utils/enums";
+import { saveToCache } from "../../utils/cache";
+
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
+import styled from "@emotion/styled";
+
+const Content = styled(CardContent)`
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+`;
 
 export default function LeagueCard(props = {}) {
     const { league = {} } = props;
     const { idLeague, strLeague, strSport, strLeagueAlternate } = league;
-    const { getBadge, loadingBadge } = useLeaguesContext();
-    const [flipped, setFlipped] = useState(false);
+    const { setBadgeCache, badgeCache } = useLeaguesContext();
 
+    const [flipped, setFlipped] = useState(false);
     const [badgeUrl, setBadgeUrl] = useState("");
+    const [loading, setLoading] = useState(false);
+
+    const getBadge = async (leagueId) => {
+        if (leagueId in badgeCache) {
+            setLoading(false);
+            return badgeCache[leagueId];
+        }
+
+        const badgeData = await fetchFromApi(SEASON_BADGE, { id: leagueId });
+        const badge = badgeData?.seasons?.[0]?.strBadge || "";
+        const updatedCache = { ...badgeCache, [leagueId]: badge };
+
+        setBadgeCache(updatedCache);
+        saveToCache(BADGES_CACHE_KEY, updatedCache, BADGES_TTL);
+        setLoading(false);
+        return badge;
+    };
 
     const handleCardClick = async () => {
         setBadgeUrl("");
         setFlipped((f) => !f);
-        if (!loadingBadge) {
+        if (!loading) {
+            setLoading(true);
             const url = await getBadge(idLeague);
             setBadgeUrl(url);
         }
@@ -50,17 +85,7 @@ export default function LeagueCard(props = {}) {
 
                 }}
             >
-                <CardContent
-                    style={{
-                        position: "absolute",
-                        width: "100%",
-                        height: "100%",
-                        backfaceVisibility: "hidden",
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "center",
-                    }}
-                >
+                <Content>
                     <Typography gutterBottom variant="h6" component="div" align="center">
                         {strLeague}
                     </Typography>
@@ -70,27 +95,17 @@ export default function LeagueCard(props = {}) {
                     <Typography gutterBottom variant="h6" component="div" align="center">
                         {strLeagueAlternate}
                     </Typography>
-                </CardContent>
+                </Content>
 
-                {!loadingBadge &&<CardContent
-                    style={{
-                        position: "absolute",
-                        width: "100%",
-                        height: "100%",
-                        backfaceVisibility: "hidden",
-                        transform: "rotateY(180deg)",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                    }}
-                >
-                    {badgeUrl ?
-                        <Badge selectedBadgeUrl={badgeUrl} /> :
+                <Content style={{ transform:  "rotateY(180deg)" }}>
+                    {badgeUrl ? (
+                        <Badge selectedBadgeUrl={badgeUrl} />
+                    ) : !loading ? (
                         <Typography variant="body2" color="textSecondary">
                             No Season Badge
                         </Typography>
-                    }
-                </CardContent>}
+                    ) : null}
+                </Content>
             </div>
         </Card>
     );

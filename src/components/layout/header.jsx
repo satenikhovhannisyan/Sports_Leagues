@@ -1,7 +1,7 @@
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { styled } from '@mui/material/styles';
+import styled from "@emotion/styled";
 
 const ToolBar = styled(Toolbar)(({ theme }) => ({
     display: 'flex',
@@ -13,7 +13,7 @@ function Header() {
     return (
         <AppBar position="static" >
             <ToolBar>
-                <img src="/public/logo.svg" alt="Logo" style={{ height: 80 }} />
+                <img src="/logo.svg" alt="Logo" style={{ height: 80 }} />
                 <Typography
                     variant="h3"
                     noWrap

@@ -1,4 +1,4 @@
-import { useLeaguesContext } from "./context/export";
+import { useLeaguesContext } from "../../context/export";
 import TextField from "@mui/material/TextField";
 
 function SearchBar() {
