@@ -72,7 +72,7 @@ export default function LeagueCard(props = {}) {
                     </Typography>
                 </CardContent>
 
-                <CardContent
+                {!loadingBadge &&<CardContent
                     style={{
                         position: "absolute",
                         width: "100%",
@@ -90,7 +90,7 @@ export default function LeagueCard(props = {}) {
                             No Season Badge
                         </Typography>
                     }
-                </CardContent>
+                </CardContent>}
             </div>
         </Card>
     );
